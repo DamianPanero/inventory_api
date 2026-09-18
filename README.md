@@ -69,3 +69,9 @@ uvicorn main:app --reload
 ```
 
 ## Project Structure
+├── main.py
+├── .env
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+└── .gitignore
