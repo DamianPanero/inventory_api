@@ -1,0 +1,32 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+      # env_file le dice a Docker que lea las variables del archivo .env
+      # así no las hardcodeás en el docker-compose
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=usuario
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=inventario_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U usuario -d inventario_db"]
+      interval: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
