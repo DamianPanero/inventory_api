@@ -67,7 +67,7 @@ Interactive docs at `http://localhost:8000/docs`
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
-
+```
 ## Project Structure
 ├── main.py
 ├── .env
